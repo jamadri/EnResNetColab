@@ -334,7 +334,7 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
             
-            train_loss += loss.data[0]
+            train_loss += loss.data
             _, predicted = torch.max(score.data, 1)
             total += target.size(0)
             correct += predicted.eq(target.data).cpu().sum()
@@ -351,7 +351,7 @@ if __name__ == '__main__':
             score, pert_x = net(x, target)
             
             loss = criterion(score, target)
-            test_loss += loss.data[0]
+            test_loss += loss.data
             _, predicted = torch.max(score.data, 1)
             total += target.size(0)
             correct += predicted.eq(target.data).cpu().sum()
