@@ -325,6 +325,7 @@ if __name__ == '__main__':
         correct = 0; total = 0; train_loss = 0
         net.train()
         for batch_idx, (x, target) in enumerate(train_loader):
+            print('BATCH ID', batch_idx)
           #if batch_idx < 1:
             optimizer.zero_grad()
             x, target = Variable(x.cuda()), Variable(target.cuda())
