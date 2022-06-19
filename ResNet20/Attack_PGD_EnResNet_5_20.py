@@ -223,14 +223,14 @@ if __name__ == '__main__':
     Load the trained DNN, and attack the DNN, finally save the adversarial images
     """
     # Load the model
-    print '==> Resuming from checkpoint..'
+    print('==> Resuming from checkpoint..')
     checkpoint = torch.load('ckpt_PGD_ensemble_5_20.t7')
     net = checkpoint['net']
     epsilon = opt['epsilon']
     attack_type = opt['method']
     
     # Load the original test data
-    print '==> Load the clean image'
+    print('==> Load the clean image')
     root = './data'
     download = False
     
@@ -389,7 +389,7 @@ if __name__ == '__main__':
         for batch_idx, (x1, y1_true) in enumerate(test_loader):
           #if batch_idx < 10:
             if batch_idx - int(int(batch_idx/50.)*50) == 0:
-                print batch_idx
+                print(batch_idx)
             x_Test = x1.numpy()
             y_Test = y1_true.numpy()
             
@@ -511,7 +511,7 @@ if __name__ == '__main__':
     noise = np.array(noise).squeeze()
     labels = np.array(labels).squeeze()
     labels_pred = np.array(labels_pred).squeeze()
-    print images.shape, images_adv.shape, noise.shape, labels.shape, labels_pred.shape
+    print(images.shape, images_adv.shape, noise.shape, labels.shape, labels_pred.shape)
     
     with open("fooled_EnResNet5_20_PGD_10iters_" + attack_type + str(int(1000*epsilon)) + ".pkl", "w") as f:
     #with open("fooled_EnResNet5_20_PGD_20iters_" + attack_type + str(int(1000*epsilon)) + ".pkl", "w") as f:

@@ -278,7 +278,7 @@ if __name__ == '__main__':
     
     
     kwargs = {'num_workers':1, 'pin_memory':True}
-    batchsize_test = len(test_set)/40 #100
+    batchsize_test = 128 # Multiples of 8 are generally a good idea. #len(test_set)/40 #100
     print('Batch size of the test set: ', batchsize_test)
     test_loader = torch.utils.data.DataLoader(dataset=test_set,
                                               batch_size=batchsize_test,
