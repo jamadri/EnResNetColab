@@ -306,7 +306,7 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     
     nepoch = 200
-    for epoch in xrange(nepoch):
+    for epoch in range(nepoch):
         print('Epoch ID', epoch)
         if epoch < 80:
             lr = 0.1
