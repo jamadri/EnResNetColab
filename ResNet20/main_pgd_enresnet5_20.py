@@ -291,7 +291,7 @@ if __name__ == '__main__':
                                                shuffle=True, **kwargs
                                               )
     
-    basic_net = en_preactresnet20_cifar(num_ensembles=args.num_ensembles, noise_coef=args.noise_coef).cuda()
+    basic_net = preactresnet20_cifar().cuda()# en_preactresnet20_cifar(num_ensembles=args.num_ensembles, noise_coef=args.noise_coef).cuda()
     
     # From https://github.com/MadryLab/cifar10_challenge/blob/master/config.json
     config = {

@@ -168,9 +168,12 @@ class Ensemble_PreAct_ResNet_Cifar(nn.Module):
             ret += net(x)
             #ret += net(x, target)
         ret /= self.num_ensembles
-        
+
         return ret
 
+def preactresnet20_cifar(**kwargs):
+    model = PreAct_ResNet_Cifar(PreActBasicBlock, [3,3,3], **kwargs)
+    return model
 
 def en_preactresnet20_cifar(**kwargs):
     model = Ensemble_PreAct_ResNet_Cifar(PreActBasicBlock, [3, 3, 3], **kwargs)
