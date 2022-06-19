@@ -347,17 +347,18 @@ if __name__ == '__main__':
         #----------------------------------------------------------------------
         test_loss = 0; correct = 0; total = 0
         net.eval()
-        for batch_idx, (x, target) in enumerate(test_loader):
-            x, target = Variable(x.cuda(), volatile=True), Variable(target.cuda(), volatile=True)
-            score, pert_x = net(x, target)
-            
-            loss = criterion(score, target)
-            test_loss += loss.data
-            _, predicted = torch.max(score.data, 1)
-            total += target.size(0)
-            correct += predicted.eq(target.data).cpu().sum()
-            progress_bar(batch_idx, len(test_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-            % (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
+        with torch.no_grad():
+            for batch_idx, (x, target) in enumerate(test_loader):
+                x, target = x.cuda(), target.cuda()
+                score, pert_x = net(x, target)
+                
+                loss = criterion(score, target)
+                test_loss += loss.data
+                _, predicted = torch.max(score.data, 1)
+                total += target.size(0)
+                correct += predicted.eq(target.data).cpu().sum()
+                progress_bar(batch_idx, len(test_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
+                % (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
         
         #----------------------------------------------------------------------
         # Save the checkpoint
